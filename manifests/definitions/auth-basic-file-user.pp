@@ -1,5 +1,5 @@
 define apache::auth::basic::file::user (
-  $ensure="present", 
+  $ensure="present",
   $authname="Private Area",
   $vhost,
   $location="/",
@@ -13,7 +13,7 @@ define apache::auth::basic::file::user (
     debian : { $wwwroot = "/var/www" }
     default : { fail "Unsupported operatingsystem ${operatingsystem}" }
   }
- 
+
   if defined(Apache::Module["authn_file"]) {} else {
     apache::module {"authn_file": }
   }

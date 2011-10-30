@@ -1361,7 +1361,7 @@ local($|)= 1 ;
 
 # In mod_perl, global variables are retained between calls, so they must
 #   be initialized correctly.  In this program, (most) UPPER_CASE variables
-#   are persistent constants, i.e. they aren't changed after they're 
+#   are persistent constants, i.e. they aren't changed after they're
 #   initialized above (in the $HAS_BEGUN block).  We also assume that no
 #   lower_case variables are set before here.  It's a little hacky and possibly
 #   error-prone if user customizations don't follow these conventions, but it's
@@ -1497,7 +1497,7 @@ if ( $ALLOW_USER_CONFIG && ($packed_flags ne '') ) {
 
 # Create a one-flag test for whether we're inserting anything into THIS page.
 # This must happen after user flags are read, just above.
-$doing_insert_here= !$is_in_frame && 
+$doing_insert_here= !$is_in_frame &&
     ( $e_insert_entry_form || ($INSERT_FILE ne '') || ($INSERT_HTML ne '') ) ;
 
 
@@ -2273,10 +2273,10 @@ sub proxify_html {
 	    #   assumed to be all attributes whose names start with "on".  This
 	    #   is the case with HTML 4.01 as of late 1999.
 	    # Script macros, aka the Netscape-specific "JavaScript entities",
-	    #   have the form "&{ script-content };" and may appear within	
+	    #   have the form "&{ script-content };" and may appear within
 	    #   (and thus invoke JavaScript within) *any* HTML attribute.
 	    #   Other browsers may emulate Netscape, so we handle these for
-	    #   all browsers. 
+	    #   all browsers.
 	    # MSIE-specific "dynamic properties" can be in style attributes.
 	    #   I can't find a definitive reference for their syntax (tell me
 	    #   if you know of one), so in handling them we err on the safe
@@ -2796,7 +2796,7 @@ sub proxify_html {
 		#   current $base_ vars.  This is the quick method from full_url().
 		# Only do this if $codebase_url is not empty.
 		if ($codebase_url ne '') {
-		    $codebase_url= 
+		    $codebase_url=
 			  $codebase_url=~ m#^[\w+.-]*:#i ? $codebase_url
 			: $codebase_url=~ m#^//#         ? $base_scheme . $codebase_url
 			: $codebase_url=~ m#^/#          ? $base_host . $codebase_url
@@ -2892,7 +2892,7 @@ sub proxify_html {
 		#   current $base_ vars.  This is the quick method from full_url().
 		# Only do this if $codebase_url is not empty.
 		if ($codebase_url ne '') {
-		    $codebase_url= 
+		    $codebase_url=
 			  $codebase_url=~ m#^[\w+.-]*:#i ? $codebase_url
 			: $codebase_url=~ m#^//#         ? $base_scheme . $codebase_url
 			: $codebase_url=~ m#^/#          ? $base_host . $codebase_url
@@ -3634,7 +3634,7 @@ sub transmit_html_in_parts {
 #   there may be multiple statements in the URL, separated by semicolons, we
 #   need to use separate_last_js_statement().
 # This is a major bottleneck for the whole program, so speed is important here.
-# Note that the calculations of $url_start, $base_scheme, $base_host, 
+# Note that the calculations of $url_start, $base_scheme, $base_host,
 #   $base_path, and $base_file throughout the program are an integral part of
 #   this routine, placed elsewhere for speed.
 # For HTTP, The URL to be encoded should include everything that is sent in
@@ -4541,7 +4541,7 @@ sub http_get {
 		# A body starting with "\xEF\xBB\xBF" (non-standardly) indicates
 		#   a UTF-8 resource.  We can only know this after reading
 		#   $body, thus it's done here and not above.
-		# The string "\xEF\xBB\xBF" is sort of like a non-standard BOM 
+		# The string "\xEF\xBB\xBF" is sort of like a non-standard BOM
 		#   for UTF-8, though UTF-8 doesn't need a BOM.  Some systems
 		#   don't handle it, so remove it if found.
 		if ($body=~ s/^\xef\xbb\xbf//) {
@@ -4609,7 +4609,7 @@ sub http_get {
 		    $transmit_in_parts= 1, last  if $URL=~ /$_/ ;
 		}
 
-		# Transmit the HTML in parts if so configured. 
+		# Transmit the HTML in parts if so configured.
 		if ($transmit_in_parts) {
 		    print $status ;
 		    &transmit_html_in_parts($headers, 'S') ;
@@ -7860,7 +7860,7 @@ sub proxify_js {
 		my $start_paren= $in=~ /\G$RE_JS_SKIP*\(/gco ;
 		my($o, $p)= &get_next_js_term(\$in) ;
 		last unless defined($p) ;
-		last if $start_paren and !($in=~ /\G$RE_JS_SKIP*\)/gco) ; 
+		last if $start_paren and !($in=~ /\G$RE_JS_SKIP*\)/gco) ;
 		if ($o ne '') {
 		    push(@out, " _proxy_jslib_assign('$token', (" . (&proxify_js($o, 0, $with_level))[0] . "), (" . (&proxify_js($p, 0, $with_level))[0] . "), '')" ) ;
 		} else {
@@ -8410,7 +8410,7 @@ sub get_next_js_expr {
 	# For more details, see the ECMAScript spec, section 7.9 .
 	} elsif ($element=~ /^$RE_JS_LINE_TERMINATOR$/o) {
 	    pos($$s)= $pos-length($element), return join('', @out)
-		if !$allow_multiple and !@p 
+		if !$allow_multiple and !@p
 		   and $last_token=~ m#^(?:\)|\]|\+\+|--)$|
 				       ^(?!(?:case|delete|do|else|in|instanceof|new|typeof|void|function|var)$)
 					(?:\pL|[\$_\\0-9'"]|\.\d|/..)#x
@@ -10044,7 +10044,7 @@ function _proxy_jslib_flush_write_buffers() {
     for (i= 0 ; (_proxy_jslib_write_buffers!=void 0) && (i<_proxy_jslib_write_buffers.length) ; i++) {
 	buf= _proxy_jslib_write_buffers[i] ;
 	if (buf.buf==void 0) continue ;
- 
+
 	p= _proxy_jslib_proxify_html(buf.buf, buf.doc, !buf.has_js) ;
 	if (p[3]) return ;   // found frame document
 //var w= _proxy_jslib_doc2win(buf.doc) ; if (w!=void 0) w= w.name ;
@@ -12447,7 +12447,7 @@ sub proxify_swf_action_list {
 
     $out= join('', @out) ;
 
-    die "ERROR: out_bytes not set correctly\n" if $out_bytes!=length($out) ; 
+    die "ERROR: out_bytes not set correctly\n" if $out_bytes!=length($out) ;
     die "ERROR: read wrong number of bytes (expected $action_record_size, got ".(pos($$in)-$start_pos).")\n"
 	if defined($action_record_size) and pos($$in)-$start_pos!=$action_record_size ;
 
