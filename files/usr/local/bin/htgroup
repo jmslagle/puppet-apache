@@ -29,7 +29,7 @@ update () {
                 echo "htgroup: file $filename not found; use '-c' to create it"; exit 0
         fi
 
-        if ( grep -q "^$groupname" $filename ); then    
+        if ( grep -q "^$groupname" $filename ); then
                 sed -i "s/^$groupname:.*/$groupname: $members/" $filename
         else
                 echo "$groupname: $members" >> $filename

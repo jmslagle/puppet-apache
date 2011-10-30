@@ -118,7 +118,7 @@ define apache::vhost-ssl (
       $wwwconf = "/etc/apache2"
     }
     default : { fail "Unsupported operatingsystem ${operatingsystem}" }
-  }    
+  }
 
   # define variable names used in vhost-ssl.erb template
   $certfile      = "$wwwroot/$name/ssl/$name.crt"

@@ -33,7 +33,7 @@ define apache::vhost (
       $wwwroot = "/var/www"
     }
     default : { fail "Unsupported operatingsystem ${operatingsystem}" }
-  }    
+  }
 
   # check if default virtual host is enabled
   if $enable_default {
@@ -106,7 +106,7 @@ define apache::vhost (
         },
         require => [File["${wwwroot}/${name}"]],
       }
- 
+
       if $htdocs {
         File["${wwwroot}/${name}/htdocs"] {
           source  => $htdocs,
@@ -150,7 +150,7 @@ define apache::vhost (
           } else {
             # default vhost template
             File["$wwwconf/sites-available/${name}"] {
-              content => template("apache/vhost.erb"), 
+              content => template("apache/vhost.erb"),
             }
           }
        }
@@ -241,7 +241,7 @@ define apache::vhost (
         ensure  => absent,
         require => Exec["disable vhost ${name}"]
       }
-      
+
       file { "$wwwconf/sites-available/${name}":
         ensure  => absent,
         require => Exec["disable vhost ${name}"]

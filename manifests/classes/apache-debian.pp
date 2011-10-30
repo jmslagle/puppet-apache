@@ -29,7 +29,7 @@ class apache::debian inherits apache::base {
     ensure  => installed,
     require => Package["apache"],
   }
-  
+
   # directory not present in lenny
   file {"/var/www/apache2-default":
     ensure  => absent,
@@ -59,7 +59,7 @@ class apache::debian inherits apache::base {
     notify  => Service["apache"],
     require => Package["apache"],
   }
-  
+
   file {"/etc/apache2/ports.conf":
     ensure => present,
     owner => root,
@@ -69,10 +69,10 @@ class apache::debian inherits apache::base {
     notify  => Service["apache"],
     require => Package["apache"],
   }
-  
+
   file {"/etc/apache2/sites-available/default-ssl":
     ensure => absent,
     force => true,
   }
-    
+
 }
