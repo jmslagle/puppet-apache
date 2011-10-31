@@ -5,11 +5,11 @@ define apache::webdav::instance ($ensure=present, $vhost, $directory=false) {
     debian : { $wwwroot = "/var/www" }
     default : { fail "Unsupported operatingsystem ${operatingsystem}" }
   }
- 
+
   if $directory {
     $davdir = "${directory}/webdav-${name}"
   } else {
-    $davdir = "${wwwroot}/${vhost}/private/webdav-${name}" 
+    $davdir = "${wwwroot}/${vhost}/private/webdav-${name}"
   }
 
   file {$davdir:

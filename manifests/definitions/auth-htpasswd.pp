@@ -1,5 +1,5 @@
 define apache::auth::htpasswd (
-  $ensure="present", 
+  $ensure="present",
   $vhost=false,
   $userFileLocation=false,
   $userFileName="htpasswd",
@@ -11,8 +11,8 @@ define apache::auth::htpasswd (
     redhat,CentOS : { $wwwroot = "/var/www/vhosts" }
     debian : { $wwwroot = "/var/www" }
     default : { fail "Unsupported operatingsystem ${operatingsystem}" }
-  } 
- 
+  }
+
   if $userFileLocation {
     $_userFileLocation = $userFileLocation
   } else {
@@ -22,9 +22,9 @@ define apache::auth::htpasswd (
       fail "parameter vhost is require !"
     }
   }
-  
+
   $_authUserFile = "${_userFileLocation}/${userFileName}"
-  
+
   case $ensure {
 
     'present': {
@@ -61,7 +61,7 @@ define apache::auth::htpasswd (
         command => "rm -f $_authUserFile",
         onlyif => "wc -l $_authUserFile |grep -q 0",
         refreshonly => true,
-      } 
+      }
     }
   }
 }

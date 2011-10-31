@@ -1,5 +1,5 @@
 class apache::redhat inherits apache::base {
-  
+
   # BEGIN inheritance from apache::base
   Exec["apache-graceful"] {
     command => "/usr/sbin/apachectl graceful",
@@ -10,7 +10,7 @@ class apache::redhat inherits apache::base {
   File["root directory"] { path => "/var/www/vhosts" }
   File["cgi-bin directory"] { path => "/var/www/cgi-bin" }
 
-  File["logrotate configuration"] { 
+  File["logrotate configuration"] {
     path => "/etc/logrotate.d/httpd",
     source => "puppet:///apache/etc/logrotate.d/httpd",
   }
@@ -20,11 +20,11 @@ class apache::redhat inherits apache::base {
     source => "puppet:///apache/etc/httpd/conf/status.conf",
   }
 
-  File["default virtualhost"] { 
+  File["default virtualhost"] {
     path => "/etc/httpd/sites-available/default",
     source => "puppet:///apache/etc/httpd/sites-available/default",
     seltype => "httpd_config_t",
-  }  
+  }
   # END inheritance from apache::base
 
   package {"httpd":

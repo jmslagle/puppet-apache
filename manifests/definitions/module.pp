@@ -24,7 +24,7 @@ define apache::module ($ensure='present') {
           CentOS => "/usr/local/sbin/a2enmod ${name}",
           default => "/usr//sbin/a2enmod ${name}"
         },
-          
+
         unless  => "/bin/sh -c '[ -L ${wwwconf}/mods-enabled/${name}.load ] \\
           && [ ${wwwconf}/mods-enabled/${name}.load -ef ${wwwconf}/mods-available/${name}.load ]'",
         require => $a2enmod_deps,
@@ -38,15 +38,15 @@ define apache::module ($ensure='present') {
           CentOS => "/usr/local/sbin/a2dismod ${name}",
           default => "/usr//sbin/a2dismod ${name}"
         },
-        
+
         onlyif  => "/bin/sh -c '[ -L ${wwwconf}/mods-enabled/${name}.load ] \\
           || [ -e ${wwwconf}/mods-enabled/${name}.load ]'",
         require => $a2enmod_deps,
         notify  => Service["apache"],
        }
     }
-    default: { 
-      err ( "Unknown ensure value: '${ensure}'" ) 
+    default: {
+      err ( "Unknown ensure value: '${ensure}'" )
     }
   }
 }

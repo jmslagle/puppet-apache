@@ -1,5 +1,5 @@
 define apache::auth::htgroup (
-  $ensure="present", 
+  $ensure="present",
   $vhost=false,
   $groupFileLocation=false,
   $groupFileName="htgroup",
@@ -19,11 +19,11 @@ define apache::auth::htgroup (
       $_groupFileLocation = "${wwwroot}/${vhost}/private"
     } else {
       fail "parameter vhost is require !"
-    }  
+    }
   }
 
   $_authGroupFile = "${_groupFileLocation}/${groupFileName}"
-  
+
   case $ensure {
 
     'present': {
@@ -43,7 +43,7 @@ define apache::auth::htgroup (
         command => "rm -f $_authGroupFile",
         onlyif => "wc -l $_authGroupFile |grep -q 0",
         refreshonly => true,
-      } 
+      }
     }
   }
 }

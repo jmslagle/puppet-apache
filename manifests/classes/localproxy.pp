@@ -13,7 +13,7 @@ class apache::localproxy {
     CentOS => "/var/www/cgi-bin/nph-proxy.cgi",
     Debian => "/usr/lib/cgi-bin/nph-proxy.cgi",
   }
-  
+
   file { "cgi-bin/nph-proxy.cgi":
     path => $filepath,
     mode => "0755",

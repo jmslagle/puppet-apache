@@ -1,5 +1,5 @@
 define apache::auth::basic::ldap (
-  $ensure="present", 
+  $ensure="present",
   $authname="Private Area",
   $vhost,
   $location="/",
